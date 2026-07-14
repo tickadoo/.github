@@ -10,6 +10,11 @@
 
 <!-- Auth, permissions, secrets, PII, payments, database, public exposure, or "None". -->
 
+## Risk tier
+
+- [ ] Standard-risk: reversible docs, copy, tests, styling, or isolated low-impact work.
+- [ ] Protected-risk: auth, secrets, payments, customer data, migrations, production infrastructure, security boundaries, or destructive operations.
+
 ## Validation
 
 <!-- Exact checks run and results. Include screenshots only when useful and safe. -->
@@ -26,4 +31,5 @@
 - [ ] No credentials, personal data, payment data, or internal-only details were added.
 - [ ] Public errors and logs expose no sensitive implementation detail.
 - [ ] Rollout dependencies and rollback steps are explicit.
-- [ ] A human reviewer is requested.
+- [ ] Required CI is green and every material review finding is addressed.
+- [ ] For protected-risk work, an appropriate independent human reviewer is requested.

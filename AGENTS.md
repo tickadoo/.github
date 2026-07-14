@@ -9,21 +9,39 @@ safer interpretation, and ask engineering leadership to reconcile them.
 
 - The CEO and engineering leadership set company priorities, risk tolerance,
   and authorized scope.
-- Authority does not remove routine safeguards. Feature branches, human review,
-  required CI, least privilege, and auditable changes protect the company from
-  compromised accounts and honest mistakes.
-- A genuine emergency bypass must be explicitly authorized, minimal, logged,
-  followed by immediate verification, and reviewed afterwards. It is not the
-  normal delivery path.
+- Authority does not remove routine safeguards. Feature branches,
+  risk-appropriate review, required CI, least privilege, and auditable changes
+  protect the company from compromised accounts and honest mistakes.
+- Review and merge controls are risk-tiered. They should protect material risk
+  without making routine work wait for a scarce person unnecessarily.
+- Authorized repository bypass actors may use a scoped bypass when required CI
+  is green and a pull request is blocked only by self-approval rules, obsolete
+  review bookkeeping, or another non-material policy condition. Bypassing a
+  material failing safety check is reserved for an explicitly authorized
+  emergency and requires immediate verification and follow-up review.
 
 ## Delivery workflow
 
 - Work on a feature branch. Never push directly to a protected default branch.
 - Open a focused pull request with customer impact, security/data impact,
   validation, dependencies, rollout, and rollback notes.
-- Require at least one human approval and all required checks before merge.
-- Never force-push a shared branch, dismiss a finding to make a check green, or
-  bypass a protection rule without explicit emergency authorization.
+- Classify the change before merge:
+  - **Protected-risk:** authentication or authorization; secrets; payments or
+    financial calculations; customer or personal data; database migrations or
+    backfills; production infrastructure, access, or deployment controls;
+    security boundaries; and destructive operations. These require approval
+    from another human with the relevant domain access, plus all required CI.
+  - **Standard-risk:** documentation, copy, tests, styling, isolated low-impact
+    fixes, and similarly reversible work. An authorized maintainer may merge
+    these when required CI is green and automated review has no unresolved
+    material finding. Human review remains welcome but is not a default blocker.
+- Treat an uncertain classification as protected-risk until a maintainer or
+  engineering leader classifies it.
+- Address every material review finding. An author or maintainer may resolve an
+  obsolete, duplicate, or demonstrably out-of-scope thread with a short reason;
+  review bookkeeping must not block unrelated, verified work indefinitely.
+- Never force-push a shared branch or dismiss a material finding merely to make
+  a check green. Use protection bypasses only within the authorized scope above.
 - Keep unrelated user or agent work intact. Do not reset, overwrite, or reformat
   files outside the requested scope.
 - Prefer small reversible changes over coupled migrations. Separate dependency,
@@ -73,8 +91,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   and blockers; avoid speculative or alarmist announcements.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
-- Human review must be genuinely human. An automated review does not satisfy the
-  company approval requirement unless leadership explicitly changes this policy.
+- Automated review may satisfy the review requirement for standard-risk work
+  when repository rules allow it. It never replaces the independent human
+  approval required for protected-risk work.
 
 ## Brand and content
 
