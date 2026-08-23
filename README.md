@@ -8,9 +8,9 @@ pull-request template to organization repositories that do not define a local
 override. Repository-specific guidance may add stricter requirements, but must
 not weaken the company-wide safety baseline in `AGENTS.md`.
 
-Review is risk-tiered: protected-risk changes require an appropriate independent
-human approval; authorized maintainers may move standard-risk, reversible work
-after required CI and automated review are green.
+Merge authority and the temporary frontend exception are defined only in
+`AGENTS.md`. Required CI and review establish technical readiness but do not
+replace the approval defined there.
 
 No credentials, internal URLs, customer data, or confidential operating details
 belong in this repository.

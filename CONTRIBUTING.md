@@ -17,12 +17,10 @@ Thank you for helping improve a tickadoo project.
 4. Run the repository's documented checks.
 5. Open a pull request using the default template.
 
-All pull requests need their required CI before merge. Protected-risk changes
-(including auth, secrets, payments, customer data, migrations, production
-infrastructure, security boundaries, and destructive operations) also need an
-independent human approval from an appropriate reviewer. Authorized maintainers
-may merge standard-risk, reversible changes after successful automated review.
-Do not push directly to the default branch.
+All pull requests need their required CI before merge. Approval and merge
+authority, including the temporary frontend exception, are defined only in
+[AGENTS.md](./AGENTS.md). Automated review establishes technical readiness but
+does not grant merge authority. Do not push directly to the default branch.
 
 Repository-specific instructions may add stricter requirements. The company-wide
 baseline is documented in [AGENTS.md](./AGENTS.md).
