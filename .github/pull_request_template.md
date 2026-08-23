@@ -32,4 +32,5 @@
 - [ ] Public errors and logs expose no sensitive implementation detail.
 - [ ] Rollout dependencies and rollback steps are explicit.
 - [ ] Required CI is green and every material review finding is addressed.
-- [ ] For protected-risk work, an appropriate independent human reviewer is requested.
+- [ ] Francis approval is requested, unless the repository's documented frontend exception applies.
+- [ ] Protected-risk work has independent review in addition to Francis approval.

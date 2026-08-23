@@ -16,13 +16,13 @@ safer interpretation, and ask engineering leadership to reconcile them.
   approval before merge. Exact-head automated review, green required CI,
   resolved threads, admin access, and domain ownership establish readiness but
   never replace that approval.
-- Only `@francistickadoo` may use a repository protection bypass, primarily for
+- Only `@francistickadoo` may use a repository protection bypass, for
   Francis-authored pull requests that cannot be self-approved. A bypass never
   authorizes ignoring a material failing safety check.
 - `tickadoo/frontend` is the temporary risk-based exception. Dominik has
   standing merge authority for routine frontend work only after exact-head
   independent review, required CI, resolved threads, and complete reporting.
-  Francis approval remains mandatory for elevated-risk, cross-repository,
+  Francis approval remains mandatory for protected-risk, cross-repository,
   shared-contract, and monorepo-migration work. Local frontend instructions
   define the full boundary.
 
@@ -107,9 +107,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   escalating to Francis.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
-- Automated review may satisfy the review requirement for standard-risk work
-  when repository rules allow it. It never replaces the independent human
-  approval required for protected-risk work.
+- Automated review may establish technical readiness for standard-risk work.
+  Outside the documented frontend exception, it never replaces Francis's
+  required GitHub approval.
 
 ## Brand and content
 
