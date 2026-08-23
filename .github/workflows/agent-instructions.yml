@@ -1,0 +1,28 @@
+name: Agent instructions
+
+on:
+  pull_request:
+    paths:
+      - AGENTS.md
+      - CLAUDE.md
+      - .github/workflows/agent-instructions.yml
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  agent-instructions:
+    name: agent-instructions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Verify one canonical instruction source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s AGENTS.md
+          test -s CLAUDE.md
+          test "$(grep -Fxc '@AGENTS.md' CLAUDE.md)" -eq 1

@@ -127,3 +127,20 @@ Each active repository should contain a short `AGENTS.md` that:
    deployment, and safety constraints.
 3. Names the approved validation commands and deployment path.
 4. Contains no secret values and no instructions that contradict this policy.
+
+`AGENTS.md` is the repository's single agent-instruction source. A root
+`CLAUDE.md` exists only as the Claude Code entrypoint: it must contain
+`@AGENTS.md` exactly once, then only project context that has not yet been
+migrated into `AGENTS.md`. Do not maintain authority, reporting, ownership, or
+workflow policy in both files.
+
+### Monorepo instruction preservation
+
+Before moving a repository or package into a monorepo, review every source
+`AGENTS.md`, `CLAUDE.md`, nested instruction file, runbook, and linked policy.
+Classify and deliberately carry forward unique architecture, commands,
+ownership boundaries, deployment paths, safety rules, integration contracts,
+operational identifiers, historical gotchas, and validation requirements.
+Record where each retained item moved. Do not delete or replace a source
+instruction file until that preservation review is attached to the migration
+PR and the destination instructions are verified at the exact head SHA.
