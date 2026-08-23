@@ -3,8 +3,8 @@ name: Agent instructions
 on:
   pull_request:
     paths:
-      - AGENTS.md
-      - CLAUDE.md
+      - '**/AGENTS.md'
+      - '**/CLAUDE.md'
       - .github/workflows/agent-instructions.yml
   workflow_call:
 
@@ -23,7 +23,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -s AGENTS.md || { echo "AGENTS.md is missing or empty"; exit 1; }
-          test -s CLAUDE.md || { echo "CLAUDE.md is missing or empty"; exit 1; }
-          count=$(awk '$0 == "@AGENTS.md" { n++ } END { print n + 0 }' CLAUDE.md)
-          test "$count" -eq 1 || { echo "CLAUDE.md must contain exactly one literal @AGENTS.md line, found $count"; exit 1; }
+          mapfile -d '' claude_files < <(find . -name CLAUDE.md -type f -print0)
+          test "${#claude_files[@]}" -gt 0 || { echo "No CLAUDE.md found"; exit 1; }
+          for claude_file in "${claude_files[@]}"; do
+            agent_file="$(dirname "$claude_file")/AGENTS.md"
+            test -s "$agent_file" || { echo "$agent_file is missing or empty"; exit 1; }
+            count=$(awk '$0 == "@AGENTS.md" { n++ } END { print n + 0 }' "$claude_file")
+            test "$count" -eq 1 || { echo "$claude_file must contain exactly one literal @AGENTS.md line, found $count"; exit 1; }
+          done
