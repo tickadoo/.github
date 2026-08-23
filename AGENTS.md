@@ -12,13 +12,19 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- Review and merge controls are risk-tiered. They should protect material risk
-  without making routine work wait for a scarce person unnecessarily.
-- Authorized repository bypass actors may use a scoped bypass when required CI
-  is green and a pull request is blocked only by self-approval rules, obsolete
-  review bookkeeping, or another non-material policy condition. Bypassing a
-  material failing safety check is reserved for an explicitly authorized
-  emergency and requires immediate verification and follow-up review.
+- Every active repository except `tickadoo/frontend` requires Francis's GitHub
+  approval before merge. Exact-head automated review, green required CI,
+  resolved threads, admin access, and domain ownership establish readiness but
+  never replace that approval.
+- Only `@francistickadoo` may use a repository protection bypass, primarily for
+  Francis-authored pull requests that cannot be self-approved. A bypass never
+  authorizes ignoring a material failing safety check.
+- `tickadoo/frontend` is the temporary risk-based exception. Dominik has
+  standing merge authority for routine frontend work only after exact-head
+  independent review, required CI, resolved threads, and complete reporting.
+  Francis approval remains mandatory for elevated-risk, cross-repository,
+  shared-contract, and monorepo-migration work. Local frontend instructions
+  define the full boundary.
 
 ## Delivery workflow
 
@@ -29,12 +35,12 @@ safer interpretation, and ask engineering leadership to reconcile them.
   - **Protected-risk:** authentication or authorization; secrets; payments or
     financial calculations; customer or personal data; database migrations or
     backfills; production infrastructure, access, or deployment controls;
-    security boundaries; and destructive operations. These require approval
-    from another human with the relevant domain access, plus all required CI.
+    security boundaries; and destructive operations. These require Francis's
+    explicit approval plus all required CI and independent review.
   - **Standard-risk:** documentation, copy, tests, styling, isolated low-impact
-    fixes, and similarly reversible work. An authorized maintainer may merge
-    these when required CI is green and automated review has no unresolved
-    material finding. Human review remains welcome but is not a default blocker.
+    fixes, and similarly reversible work. Outside the documented frontend
+    exception, Francis approval is still required after technical readiness is
+    established.
 - Treat an uncertain classification as protected-risk until a maintainer or
   engineering leader classifies it.
 - Address every material review finding. An author or maintainer may resolve an
@@ -89,6 +95,16 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Identify automated updates with a stable tag such as `[agent-repo-purpose]`.
 - Keep coordination calm and factual. Report actions taken, links, verification,
   and blockers; avoid speculative or alarmist announcements.
+- Reporting is part of delivery. Before the first shared mutation, post
+  `STARTED` to `#activity` (`C0ATET93PQV`) with issue, repo, branch, scope, and
+  risk. Report `REVIEW READY`, `MERGED`, `DEPLOYED`, `VERIFIED`, and `PAUSED`
+  separately with exact SHAs and evidence. When work originates in Slack, reply
+  in that thread too. Correct missing reporting before another shared mutation,
+  merge, or deploy.
+- Use `#unblock-queue` (`C0BHKDV7BS5`) only for one concrete action another
+  actor must take. Include owner, issue, PR, exact SHA, requested action, risk,
+  evidence, and deadline. Agents investigate and clear routine blockers before
+  escalating to Francis.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
 - Automated review may satisfy the review requirement for standard-risk work
