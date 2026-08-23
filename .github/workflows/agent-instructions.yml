@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -d '^@' claude_files < <(find . -name CLAUDE.md -type f -print0)
+          mapfile -d '' claude_files < <(find . -name CLAUDE.md -type f -print0)
           test "${#claude_files[@]}" -gt 0 || { echo "No CLAUDE.md found"; exit 1; }
           for claude_file in "${claude_files[@]}"; do
             agent_file="$(dirname "$claude_file")/AGENTS.md"
