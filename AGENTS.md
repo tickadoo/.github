@@ -12,16 +12,28 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- Every active repository except `tickadoo/frontend` requires Francis's GitHub
-  approval before merge. Exact-head automated review, green required CI,
-  resolved threads, admin access, and domain ownership establish readiness but
-  never replace that approval.
-- Only `@francistickadoo` may use a repository protection bypass, for
-  Francis-authored pull requests that cannot be self-approved. A bypass never
-  authorizes ignoring a material failing safety check.
+- Every active repository except `tickadoo/frontend` uses Francis as the
+  accountable merge authority. For a Francis-authored standard-risk pull
+  request, this policy grants standing merge authority to the repository's
+  approved automated merge steward after exact-head opposite-vendor review,
+  green required CI, resolved threads, and complete reporting. The steward must
+  execute trusted default-branch code, verify immutable evidence, and supply
+  neither the review nor the authority it checks. Its identity and entrypoint
+  must be documented in the repository instructions. A pull request authored
+  by anyone else, or any protected-risk pull request, still requires Francis's
+  explicit exact-head approval.
+- Francis's exact-head authority may be recorded as a GitHub approval or as an
+  authenticated, SHA-bound command issued by Francis from his own interactive
+  session and retained in its auditable task or pull-request record. This is an
+  authority record, not a steward attestation, and applies when GitHub will not
+  allow Francis to self-approve his own pull request. Only
+  `@francistickadoo` may use a repository protection bypass, and only after the
+  steward has verified the applicable review, CI, thread, risk, authority, and
+  SHA gates. A bypass never authorizes ignoring a material failing safety
+  check.
 - `tickadoo/frontend` is the temporary risk-based exception. Dominik has
   standing merge authority for routine frontend work only after exact-head
-  independent review, required CI, resolved threads, and complete reporting.
+  opposite-vendor review, required CI, resolved threads, and complete reporting.
   Francis approval remains mandatory for protected-risk, cross-repository,
   shared-contract, and monorepo-migration work. Local frontend instructions
   define the full boundary.
@@ -35,12 +47,17 @@ safer interpretation, and ask engineering leadership to reconcile them.
   - **Protected-risk:** authentication or authorization; secrets; payments or
     financial calculations; customer or personal data; database migrations or
     backfills; production infrastructure, access, or deployment controls;
-    security boundaries; and destructive operations. These require Francis's
-    explicit approval plus all required CI and independent review.
+    security boundaries; destructive operations; and governance trust roots
+    such as CODEOWNERS, agent authority instructions, branch-protection
+    automation, or the independent reviewer and merge steward. These require
+    Francis's explicit exact-head approval plus all required CI and exact-head
+    opposite-vendor review. A reviewer must execute from trusted default-branch
+    code, so it may review an untrusted proposed change to its future version
+    without becoming self-modifying.
   - **Standard-risk:** documentation, copy, tests, styling, isolated low-impact
-    fixes, and similarly reversible work. Outside the documented frontend
-    exception, Francis approval is still required after technical readiness is
-    established.
+    fixes, and similarly reversible work. A Francis-authored pull request may
+    merge under the standing steward authority above once technical readiness
+    is established. Other authors still require Francis's exact-head approval.
 - Treat an uncertain classification as protected-risk until a maintainer or
   engineering leader classifies it.
 - Address every material review finding. An author or maintainer may resolve an
@@ -107,9 +124,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   escalating to Francis.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
-- Automated review may establish technical readiness for standard-risk work.
-  Outside the documented frontend exception, it never replaces Francis's
-  required GitHub approval.
+- Automated review may establish technical readiness but never grants merge
+  authority by itself. Authority comes from the standard-risk standing steward
+  rule above or from Francis's explicit exact-head approval.
 
 ## Brand and content
 
