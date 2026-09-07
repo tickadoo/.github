@@ -112,12 +112,20 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Identify automated updates with a stable tag such as `[agent-repo-purpose]`.
 - Keep coordination calm and factual. Report actions taken, links, verification,
   and blockers; avoid speculative or alarmist announcements.
-- Reporting is part of delivery. Before the first shared mutation, post
-  `STARTED` to `#activity` (`C0ATET93PQV`) with issue, repo, branch, scope, and
-  risk. Report `REVIEW READY`, `MERGED`, `DEPLOYED`, `VERIFIED`, and `PAUSED`
-  separately with exact SHAs and evidence. When work originates in Slack, reply
-  in that thread too. Correct missing reporting before another shared mutation,
-  merge, or deploy.
+- Reporting is part of delivery, but Slack is not an execution log. Record
+  scope, risk, exact SHAs, validation and distinct `REVIEW READY`, `MERGED`,
+  `DEPLOYED`, `VERIFIED`, and `PAUSED` states in GitHub or the auditable task
+  record. Use Hive for agent coordination. Correct missing delivery evidence
+  before another shared mutation, merge, or deploy.
+- Use human-facing Slack for decisions, exceptions and meaningful outcomes.
+  Do not post routine `STARTED`, `REVIEW READY`, run-status, SHA, rebase or
+  session chatter to `#activity` (`C0ATET93PQV`), `#ovation` or `#general`.
+  Routine success and unchanged scheduled state stay silent. Keep one
+  top-level message per task or incident, with subsequent updates in-thread;
+  use at most five short bullets and 600 characters, leading with human impact,
+  any required owner/action, and one evidence link. When work originates in
+  Slack, reply in that request thread with material progress and the verified
+  outcome. A checkmark means finished and verified, not merely merged or paused.
 - Use `#unblock-queue` (`C0BHKDV7BS5`) only for one concrete action another
   actor must take. Include owner, issue, PR, exact SHA, requested action, risk,
   evidence, and deadline. Agents investigate and clear routine blockers before
