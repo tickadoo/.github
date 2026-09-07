@@ -110,8 +110,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Read this file and the repository's local instructions completely before work.
 - Check for active human or agent work before editing overlapping files.
 - Identify automated updates with a stable tag such as `[agent-repo-purpose]`.
-- Keep coordination calm and factual. Report actions taken, links, verification,
-  and blockers; avoid speculative or alarmist announcements.
+- Keep coordination calm and factual. Record actions taken, links, verification,
+  and blockers in GitHub or the auditable task record; avoid speculative or
+  alarmist announcements.
 - Reporting is part of delivery, but Slack is not an execution log. Record
   scope, risk, exact SHAs, validation and distinct `REVIEW READY`, `MERGED`,
   `DEPLOYED`, `VERIFIED`, and `PAUSED` states in GitHub or the auditable task
