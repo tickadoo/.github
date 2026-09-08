@@ -116,10 +116,14 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Reporting is part of delivery, but Slack is not an execution log. Record
   scope, risk, exact SHAs, validation and distinct `REVIEW READY`, `MERGED`,
   `DEPLOYED`, `VERIFIED`, and `PAUSED` states in GitHub or the auditable task
-  record. Use Hive for agent coordination. Correct missing delivery evidence
+  record. Use Hive for agent coordination where available. If unavailable,
+  record scope and handoffs in GitHub or the auditable task record, treat
+  concurrent ownership as unknown, and escalate suspected overlapping edits
+  to the human dispatcher. Do not use Slack as an agent coordination fallback.
+  Correct missing delivery evidence
   before another shared mutation, merge, or deploy.
 - Use human-facing Slack for decisions, exceptions and meaningful outcomes.
-  Do not post routine `STARTED`, `REVIEW READY`, run-status, SHA, rebase or
+  Do not post routine `STARTED`, `REVIEW READY`, run-status, commit SHAs, rebase or
   session chatter to `#activity` (`C0ATET93PQV`), `#ovation` or `#general`.
   Routine success and unchanged scheduled state stay silent. Keep one
   top-level message per task or incident, with subsequent updates in-thread;
