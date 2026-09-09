@@ -44,8 +44,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   booking display, offline ticket storage and other sensitive client code,
   but every PR requires exact-head independent opposite-vendor AI review,
   passing relevant tests and required CI, resolved material findings, and an
-  auditable review record. An AI review must not be replaced by a human-only
-  approval, and an author cannot supply their own independent review.
+  auditable review record. Independent AI review and eligible non-author
+  GitHub approval are separate mandatory gates. A GitHub approval alone does
+  not satisfy the AI-review gate; an author cannot review their own work.
   Preserve the eligible non-author GitHub approval gate; Francis's AI may
   submit that review on his behalf from an eligible non-author GitHub account
   without asking him again for an in-scope app change. Record the submitting
@@ -71,8 +72,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
     security boundaries; destructive operations; and governance trust roots
     such as CODEOWNERS, agent authority instructions, branch-protection
     automation, or the independent reviewer and merge steward. These require
-    Francis's explicit exact-head approval, except only client changes that
-    satisfy every boundary of the mobile delegation above. All its listed
+    Francis's explicit exact-head approval, except for client changes in
+    `tickadoo/tickadoo-app` satisfying every mobile-delegation boundary above. All listed
     exclusions retain Francis's approval requirement even in the app repo.
     Every change still requires all required CI and exact-head
     opposite-vendor review. A reviewer must execute from trusted default-branch
