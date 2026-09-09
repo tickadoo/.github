@@ -12,8 +12,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- Every active repository except `tickadoo/frontend` and `tickadoo/tickadoo-app` uses Francis as the
-  accountable merge authority. For a Francis-authored standard-risk pull
+- Every active repository except `tickadoo/frontend` and
+  `tickadoo/tickadoo-app` uses Francis as the accountable merge authority.
+  For a Francis-authored standard-risk pull
   request, this policy grants standing merge authority to the repository's
   approved automated merge steward after exact-head opposite-vendor review,
   green required CI, resolved threads, and complete reporting. The steward must
@@ -46,8 +47,11 @@ safer interpretation, and ask engineering leadership to reconcile them.
   auditable review record. An AI review must not be replaced by a human-only
   approval, and an author cannot supply their own independent review.
   Preserve the eligible non-author GitHub approval gate; Francis's AI may
-  submit that review on his behalf without asking him again for an in-scope
-  app change. This delegation does not grant protection bypass rights.
+  submit that review on his behalf from an eligible non-author GitHub account
+  without asking him again for an in-scope app change. Record the submitting
+  account, actual reviewer vendor and exact reviewed SHA; a delegated identity
+  does not make an author's self-review independent. This delegation does not
+  grant protection bypass rights.
   Howard/backend changes, shared API contracts, production data or money
   actions, new permissions/credentials, security-boundary changes, governance
   controls and monorepo migration remain outside this delegation. Public
@@ -67,8 +71,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
     security boundaries; destructive operations; and governance trust roots
     such as CODEOWNERS, agent authority instructions, branch-protection
     automation, or the independent reviewer and merge steward. These require
-    Francis's explicit exact-head approval (except app-only client work within
-    the explicit mobile delegation above) plus all required CI and exact-head
+    Francis's explicit exact-head approval, except only client changes that
+    satisfy every boundary of the mobile delegation above. All its listed
+    exclusions retain Francis's approval requirement even in the app repo.
+    Every change still requires all required CI and exact-head
     opposite-vendor review. A reviewer must execute from trusted default-branch
     code, so it may review an untrusted proposed change to its future version
     without becoming self-modifying.
