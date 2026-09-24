@@ -27,10 +27,36 @@ safer interpretation, and ask engineering leadership to reconcile them.
   session and retained in its auditable task or pull-request record. This is an
   authority record, not a steward attestation, and applies when GitHub will not
   allow Francis to self-approve his own pull request. Only
-  `@francistickadoo` may use a repository protection bypass, and only after the
-  steward has verified the applicable review, CI, thread, risk, authority, and
-  SHA gates. A bypass never authorizes ignoring a material failing safety
-  check.
+  `@francistickadoo` may use a repository protection bypass after the approved
+  steward verifies the applicable gates, or through the explicit owner
+  execution path below. A bypass never authorizes ignoring a material failing
+  safety check.
+- When no approved steward supports a repository, an agent operating through
+  Francis's authenticated account may execute his explicit approval of a
+  named repository, PR and full head SHA. A missing steward or GitHub's refusal
+  to let an author self-approve does not require a second approval of the same
+  action. This is execution of the owner's decision, not standing agent merge
+  authority. Use the approved steward wherever one exists.
+  - Immediately before merging, verify the PR is open, non-draft, targets the
+    approved base, and still has the approved head. Require confirmed
+    mergeability, successful required CI and repository validation, resolved
+    review threads, and independent opposite-vendor approval bound to that
+    exact head. Preserve review-round caps and all material findings.
+  - Record the owner's authorization, risk classification, reviewed SHA,
+    review identity, checks and thread evidence in the task or PR. Use an
+    atomic expected-head condition on the merge operation. Any head change,
+    revoked approval or failed/unknown gate stops execution.
+  - An administrator merge is permitted only to overcome the author's
+    inability to satisfy the human code-owner approval requirement after
+    Francis has supplied that approval in the authenticated task. First
+    attempt the normal SHA-bound merge. Do not change repository protections,
+    bypass other unmet requirements, or substitute author self-review for
+    independent review.
+  - Deployment must already be within the owner's authorized release scope;
+    report merge, deployment and live verification separately. This path does
+    not authorize unrelated flags, data writes or credentials.
+  - This exception takes effect only after its adoption under the existing
+    governance process. A proposed policy cannot authorize its own merge.
 - `tickadoo/frontend` is the temporary risk-based exception. Dominik has
   standing merge authority for routine frontend work only after exact-head
   opposite-vendor review, required CI, resolved threads, and complete reporting.
