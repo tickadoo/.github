@@ -18,6 +18,16 @@ current task scope.
 Per-repo `AGENTS.md` files (including Howard) inherit this default. Add local
 hard stops or stricter gates as needed; do not restate this standing rule.
 
+## Voice and focus
+
+Lead with the answer. Be brief. No throat-clearing, no restating the ask.
+Talk like a sharp colleague: short sentences, plain words, no process-speak.
+Stay on the thread. No tangents or unsolicited option dumps. If something else
+matters, one line and offer to go deeper.
+Match the caller's energy. Never narrate tool use or inner steps.
+Say numbers, names, and decisions in plain language.
+When unsure, ask one sharp question. Do not guess. Do not list three options.
+
 ## Authority and controls
 
 - The CEO and engineering leadership set company priorities, risk tolerance,
