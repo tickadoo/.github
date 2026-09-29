@@ -14,9 +14,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   protect the company from compromised accounts and honest mistakes.
 - Every active repository except `tickadoo/frontend` and
   `tickadoo/tickadoo-app` uses Francis as the accountable merge authority.
-  For a Francis-authored standard-risk pull
-  request, this policy grants standing merge authority to the repository's
-  approved automated merge steward after exact-head opposite-vendor review,
+  For a Francis-authored standard-risk pull request, this policy grants
+  standing merge authority to the repository's approved automated merge
+  steward after exact-head opposite-vendor review,
   green required CI, resolved threads, and complete reporting. The steward must
   execute trusted default-branch code, verify immutable evidence, and supply
   neither the review nor the authority it checks. Its identity and entrypoint
@@ -47,16 +47,19 @@ safer interpretation, and ask engineering leadership to reconcile them.
   auditable review record. Independent AI review and eligible non-author
   GitHub approval are separate mandatory gates. A GitHub approval alone does
   not satisfy the AI-review gate; an author cannot review their own work.
-  Preserve the eligible non-author GitHub approval gate; Francis's AI may
+  Preserve the eligible non-author GitHub approval gate; Codex may
   submit that review on his behalf from an eligible non-author GitHub account
   without asking him again for an in-scope app change. Record the submitting
   account, actual reviewer vendor and exact reviewed SHA; a delegated identity
-  does not make an author's self-review independent. This delegation does not
-  grant protection bypass rights.
-  Howard/backend changes, shared API contracts, production data or money
-  actions, new permissions/credentials, security-boundary changes, governance
-  controls and monorepo migration remain outside this delegation. Public
-  App Store submission/release and marketing claims stay with the designated
+  does not make an author's self-review independent. The GitHub approval must
+  apply to the final merge head and be obtained again after any head change.
+  This delegation does not grant protection bypass rights.
+  The app-only delegation exclusion list is: backend changes (including
+  Howard), shared API contracts, production data or money actions,
+  new permissions/credentials, security-boundary changes, governance
+  controls, destructive operations and monorepo migration. These remain
+  outside this delegation. Public App Store submission/release and marketing
+  claims stay with the designated
   release/product owner, currently Mark; app autonomy does not waive release
   acceptance tests or independently authorize a public release.
 
@@ -73,8 +76,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
     such as CODEOWNERS, agent authority instructions, branch-protection
     automation, or the independent reviewer and merge steward. These require
     Francis's explicit exact-head approval, except for client changes in
-    `tickadoo/tickadoo-app` satisfying every mobile-delegation boundary above. All listed
-    exclusions retain Francis's approval requirement even in the app repo.
+    `tickadoo/tickadoo-app` satisfying every app-only delegation boundary above.
+    Every category in the app-only delegation exclusion list above retains
+    Francis's approval requirement even in `tickadoo/tickadoo-app`.
     Every change still requires all required CI and exact-head
     opposite-vendor review. A reviewer must execute from trusted default-branch
     code, so it may review an untrusted proposed change to its future version
