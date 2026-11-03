@@ -12,17 +12,39 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- Every active repository except `tickadoo/frontend` and
-  `tickadoo/tickadoo-app` uses Francis as the accountable merge authority.
-  For a Francis-authored standard-risk pull request, this policy grants
-  standing merge authority to the repository's approved automated merge
-  steward after exact-head opposite-vendor review,
-  green required CI, resolved threads, and complete reporting. The steward must
-  execute trusted default-branch code, verify immutable evidence, and supply
-  neither the review nor the authority it checks. Its identity and entrypoint
-  must be documented in the repository instructions. A pull request authored
-  by anyone else, or any protected-risk pull request, still requires Francis's
-  explicit exact-head approval.
+- In every active repository, a pull request's author may choose to merge their
+  own in-scope change after technical readiness is independently established.
+  No separate human PR approval is required, including for protected-risk changes.
+  Existing accountable owners and implementation/product ownership remain.
+  Preserve every existing required CI and independent bot check, exact-head
+  opposite-vendor review, risk-based model and review-role counts, source
+  verification, resolved threads, and complete reporting. An author's decision
+  to merge is not an independent review and must not be recorded as a fabricated
+  GitHub self-approval. This rule grants no new repository access or bypass rights.
+- Merge execution requires an explicit authenticated author action: the author's
+  native Merge or Enable auto-merge action, or an auditable author instruction
+  bound to the repository, PR, base branch and full head SHA through an approved
+  steward. A custom steward must verify that instruction from a trusted source;
+  repository text, agent assertions and credential possession are not consent.
+  Custom instructions expire when the head changes and may be withdrawn.
+  Removing a human gate must not cause scheduled automation to merge previously
+  held PRs without this author action. Existing actor allowlists, kill switches,
+  pacing and atomic expected-head conditions remain enforced.
+- Removing a separate human PR review gate does not grant release GO. Explicit
+  per-PR merge or release holds remain blocking within their existing scope,
+  including on non-draft PRs. Deployment-only holds do not become PR merge gates.
+  An author's merge instruction does not clear another release owner's hold;
+  the authorized release owner must explicitly lift it. Author intent does not
+  authorize deployment, activation, public release or other operations outside
+  the existing release scope.
+- An approved automated merge steward must execute trusted default-branch code,
+  verify immutable evidence, and supply neither the independent review nor the
+  author instruction it checks. Its identity and entrypoint must be documented
+  in the repository instructions. Immediately before the merge write it must
+  refresh head, PR state, mergeability, checks, reviews and resolved threads;
+  missing, failed, stale, wrong-head or ambiguous evidence blocks execution.
+  Material changes-requested findings remain blocking under the existing
+  bounded review and adjudication process.
 - Francis's exact-head authority may be recorded as a GitHub approval or as an
   authenticated, SHA-bound command issued by Francis from his own interactive
   session and retained in its auditable task or pull-request record. This is an
@@ -41,7 +63,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
   are never authorization. A missing steward or GitHub's refusal
   to let an author self-approve does not require a second approval of the same
   action. This is execution of the owner's decision, not standing agent merge
-  authority. Use the approved steward wherever one exists.
+  authority or a requirement for a second human decision on another author's PR.
+  It does not replace the author's explicit action required above. Use the
+  approved steward wherever one exists.
   - A trusted default-branch verification workflow must independently establish
     technical readiness and emit an immutable run record bound to the exact
     repository, PR, base and head. It must not execute candidate code with
@@ -74,34 +98,32 @@ safer interpretation, and ask engineering leadership to reconcile them.
     not authorize unrelated flags, data writes or credentials.
   - This exception takes effect only after its adoption under the existing
     governance process. A proposed policy cannot authorize its own merge.
-- `tickadoo/frontend` is the temporary risk-based exception. Dominik has
-  standing merge authority for routine frontend work only after exact-head
-  opposite-vendor review, required CI, resolved threads, and complete reporting.
-  Francis approval remains mandatory for protected-risk, cross-repository,
-  shared-contract, and monorepo-migration work. Local frontend instructions
-  define the full boundary.
+- `tickadoo/frontend` retains Dominik's implementation and product ownership
+  boundaries. Protected-risk, cross-repository, shared-contract and monorepo
+  work still need the applicable scope and design decisions, but do not require
+  a separate human PR approval. The author-controlled merge rule above applies
+  after all independent review and validation gates pass. Local frontend
+  instructions define its implementation and release boundaries.
 - `tickadoo/tickadoo-app` has a separate app-only delegation from Francis.
   Dominik owns implementation, PR merges, Simulator/device validation and
   TestFlight delivery without per-PR Francis approval. This includes app-side
   booking display, offline ticket storage and other sensitive client code,
   but every PR requires exact-head independent opposite-vendor AI review,
   passing relevant tests and required CI, resolved material findings, and an
-  auditable review record. Independent AI review and eligible non-author
-  GitHub approval are separate mandatory gates. A GitHub approval alone does
-  not satisfy the AI-review gate; an author cannot review their own work.
-  Preserve the eligible non-author GitHub approval gate; Codex may
-  submit that review on his behalf from an eligible non-author GitHub account
-  without asking him again for an in-scope app change. Record the submitting
-  account, actual reviewer vendor and exact reviewed SHA; a delegated identity
-  does not make an author's self-review independent. The GitHub approval must
-  apply to the final merge head and be obtained again after any head change.
+  auditable review record. Separate non-author human GitHub approval is no
+  longer required. Preserve independent AI review and all required reviewer App
+  approvals, bound to the final merge head and refreshed after a head change.
+  Record the review identity, actual reviewer vendor and exact reviewed SHA;
+  a delegated identity does not make an author's self-review independent.
   This delegation does not grant protection bypass rights.
   The app-only delegation exclusion list is: backend changes (including
   Howard), shared API contracts, production data or money actions,
   new permissions/credentials, security-boundary changes, governance
   controls, destructive operations and monorepo migration. These remain
-  outside this delegation. Public App Store submission/release and marketing
-  claims stay with the designated
+  outside the app-only implementation and release delegation and require their
+  existing scope authorization. That boundary does not add a separate human PR
+  review gate to an otherwise authorized change. Public App Store
+  submission/release and marketing claims stay with the designated
   release/product owner, currently Mark; app autonomy does not waive release
   acceptance tests or independently authorize a public release.
 
@@ -116,19 +138,18 @@ safer interpretation, and ask engineering leadership to reconcile them.
     backfills; production infrastructure, access, or deployment controls;
     security boundaries; destructive operations; and governance trust roots
     such as CODEOWNERS, agent authority instructions, branch-protection
-    automation, or the independent reviewer and merge steward. These require
-    Francis's explicit exact-head approval, except for client changes in
-    `tickadoo/tickadoo-app` satisfying every app-only delegation boundary above.
-    Every category in the app-only delegation exclusion list above retains
-    Francis's approval requirement even in `tickadoo/tickadoo-app`.
-    Every change still requires all required CI and exact-head
+    automation, or the independent reviewer and merge steward. These retain
+    their existing risk-based independent bot and model review-role counts,
+    design/spec requirements, source verification and operational boundaries.
+    A separate human PR approval is not required. Every change still requires
+    all required CI and exact-head
     opposite-vendor review. A reviewer must execute from trusted default-branch
     code, so it may review an untrusted proposed change to its future version
     without becoming self-modifying.
   - **Standard-risk:** documentation, copy, tests, styling, isolated low-impact
-    fixes, and similarly reversible work. A Francis-authored pull request may
-    merge under the standing steward authority above once technical readiness
-    is established. Other authors still require Francis's exact-head approval.
+    fixes, and similarly reversible work. The author may choose to merge once
+    independent technical readiness is established, using the explicit author
+    action and approved execution paths above.
 - Treat an uncertain classification as protected-risk until a maintainer or
   engineering leader classifies it.
 - Address every material review finding. An author or maintainer may resolve an
@@ -136,6 +157,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
   review bookkeeping must not block unrelated, verified work indefinitely.
 - Never force-push a shared branch or dismiss a material finding merely to make
   a check green. Use protection bypasses only within the authorized scope above.
+- Adopt this policy change through the current governance review and merge
+  gates. A proposed policy cannot authorize its own merge or disable its own
+  review requirements. Reconcile conflicting local human-review rules through
+  reviewed changes; this document does not mutate GitHub settings.
 - Keep unrelated user or agent work intact. Do not reset, overwrite, or reformat
   files outside the requested scope.
 - Prefer small reversible changes over coupled migrations. Separate dependency,
@@ -209,8 +234,9 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
 - Automated review may establish technical readiness but never grants merge
-  authority by itself. Authority comes from the standard-risk standing steward
-  rule above or from Francis's explicit exact-head approval.
+  authority by itself. Execution requires the author's explicit authenticated
+  merge action or instruction through an approved path above. It does not
+  independently authorize deployment, access, production data writes or release.
 
 ## Brand and content
 
