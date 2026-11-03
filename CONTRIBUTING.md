@@ -17,10 +17,11 @@ Thank you for helping improve a tickadoo project.
 4. Run the repository's documented checks.
 5. Open a pull request using the default template.
 
-All pull requests need their required CI before merge. Approval and merge
-authority, including the temporary frontend exception, are defined only in
-[AGENTS.md](./AGENTS.md). Automated review establishes technical readiness but
-does not grant merge authority. Do not push directly to the default branch.
+All pull requests need their required CI and independent review before merge.
+Author-controlled merge authority and existing merge/release holds are defined
+only in [AGENTS.md](./AGENTS.md). Automated readiness does not initiate a merge;
+the author must explicitly choose an approved merge path. Do not push directly
+to the default branch.
 
 Repository-specific instructions may add stricter requirements. The company-wide
 baseline is documented in [AGENTS.md](./AGENTS.md).
