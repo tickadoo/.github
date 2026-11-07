@@ -12,22 +12,33 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- Every active repository except `tickadoo/frontend` and
-  `tickadoo/tickadoo-app` uses Francis as the accountable merge authority.
-  For a Francis-authored standard-risk pull request, this policy grants
+- In every active repository, routine (standard-risk) work merges after
+  independent bot review of the exact head being merged. This policy grants
   standing merge authority to the repository's approved automated merge
-  steward after exact-head opposite-vendor review,
-  green required CI, resolved threads, and complete reporting. The steward must
-  execute trusted default-branch code, verify immutable evidence, and supply
-  neither the review nor the authority it checks. Its identity and entrypoint
-  must be documented in the repository instructions. A pull request authored
-  by anyone else, or any protected-risk pull request, still requires Francis's
-  explicit exact-head approval.
+  steward after exact-head opposite-vendor review, green required CI, resolved
+  threads, and complete reporting. A new push invalidates that review; merge
+  requires a fresh exact-head bot review. The steward must execute trusted
+  default-branch code, verify immutable evidence, and supply neither the
+  review nor the authority it checks. Its identity and entrypoint must be
+  documented in the repository instructions. An author cannot review or
+  approve their own pull request.
+- Protected-risk work, including Howard changes, money and pricing, and
+  cross-repository frontend changes, needs one human reviewer who is not the
+  author. That human approval, and the independent bot review, must both be
+  bound to the exact head being merged. Eligible human reviewers are Francis
+  (`@francistickadoo`), Mark (`@MarkPrethero`), and Dominik
+  (`@kolarskydominik`). Delegated pricing changes are covered by this rule.
+  Mark and Dominik may review each other's protected changes and complete
+  authorised merges without another personal sign-off from Francis.
+  Independent review, green required checks, and no author self-approval
+  remain required. Any new push requires fresh exact-head bot review and
+  fresh exact-head approval from an eligible non-author human reviewer.
 - Francis's exact-head authority may be recorded as a GitHub approval or as an
   authenticated, SHA-bound command issued by Francis from his own interactive
   session and retained in its auditable task or pull-request record. This is an
-  authority record, not a steward attestation, and applies when GitHub will not
-  allow Francis to self-approve his own pull request. Only
+  authority record, not a steward attestation. It does not replace the required
+  non-author eligible human reviewer on Francis-authored protected work, and it
+  does not make an author self-approval valid. Only
   `@francistickadoo` may use a repository protection bypass after the approved
   steward verifies the applicable gates, or through the explicit owner
   execution path below. A bypass never authorizes ignoring a material failing
@@ -74,12 +85,13 @@ safer interpretation, and ask engineering leadership to reconcile them.
     not authorize unrelated flags, data writes or credentials.
   - This exception takes effect only after its adoption under the existing
     governance process. A proposed policy cannot authorize its own merge.
-- `tickadoo/frontend` is the temporary risk-based exception. Dominik has
-  standing merge authority for routine frontend work only after exact-head
-  opposite-vendor review, required CI, resolved threads, and complete reporting.
-  Francis approval remains mandatory for protected-risk, cross-repository,
-  shared-contract, and monorepo-migration work. Local frontend instructions
-  define the full boundary.
+- `tickadoo/frontend` retains Dominik's implementation ownership. Routine
+  frontend work follows the standing steward rule above. Protected-risk,
+  cross-repository, shared-contract, and monorepo-migration work remain
+  protected-risk and need one eligible non-author human reviewer named
+  above, bound to the exact head being merged, not Francis's personal
+  approval. A new push requires fresh exact-head human approval. Local
+  frontend instructions define the full boundary.
 - `tickadoo/tickadoo-app` has a separate app-only delegation from Francis.
   Dominik owns implementation, PR merges, Simulator/device validation and
   TestFlight delivery without per-PR Francis approval. This includes app-side
@@ -100,8 +112,11 @@ safer interpretation, and ask engineering leadership to reconcile them.
   Howard), shared API contracts, production data or money actions,
   new permissions/credentials, security-boundary changes, governance
   controls, destructive operations and monorepo migration. These remain
-  outside this delegation. Public App Store submission/release and marketing
-  claims stay with the designated
+  outside the app-only delegation and follow the protected-risk eligible
+  human-reviewer rule above, including delegated pricing changes; they do
+  not require Francis's personal approval when an eligible non-author
+  reviewer has approved the exact head being merged. Public App Store
+  submission/release and marketing claims stay with the designated
   release/product owner, currently Mark; app autonomy does not waive release
   acceptance tests or independently authorize a public release.
 
@@ -111,24 +126,36 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Open a focused pull request with customer impact, security/data impact,
   validation, dependencies, rollout, and rollback notes.
 - Classify the change before merge:
-  - **Protected-risk:** authentication or authorization; secrets; payments or
-    financial calculations; customer or personal data; database migrations or
-    backfills; production infrastructure, access, or deployment controls;
-    security boundaries; destructive operations; and governance trust roots
-    such as CODEOWNERS, agent authority instructions, branch-protection
-    automation, or the independent reviewer and merge steward. These require
-    Francis's explicit exact-head approval, except for client changes in
-    `tickadoo/tickadoo-app` satisfying every app-only delegation boundary above.
-    Every category in the app-only delegation exclusion list above retains
-    Francis's approval requirement even in `tickadoo/tickadoo-app`.
+  - **Protected-risk:** authentication or authorization; secrets; payments,
+    pricing, or financial calculations; customer or personal data; database
+    migrations or backfills; production infrastructure, access, or deployment
+    controls; security boundaries; destructive operations; and governance
+    trust roots such as CODEOWNERS, agent authority instructions,
+    branch-protection automation, or the independent reviewer and merge
+    steward. This includes Howard changes, money and pricing, and
+    cross-repository frontend changes. Delegated pricing changes are covered.
+    These require one eligible non-author human reviewer named above
+    (`@francistickadoo`, `@MarkPrethero`, or `@kolarskydominik`), not
+    Francis's personal approval. That human approval and the independent
+    bot review must both apply to the exact head being merged. Mark and
+    Dominik may review each other's protected changes and complete
+    authorised merges without another personal sign-off from Francis.
+    Client changes in `tickadoo/tickadoo-app` that satisfy every app-only
+    delegation boundary above remain under that delegation. Every category
+    in the app-only delegation exclusion list above is protected-risk even
+    in `tickadoo/tickadoo-app` and follows this eligible-reviewer rule.
     Every change still requires all required CI and exact-head
-    opposite-vendor review. A reviewer must execute from trusted default-branch
-    code, so it may review an untrusted proposed change to its future version
-    without becoming self-modifying.
+    opposite-vendor review of that same final head. A new push requires
+    fresh exact-head bot review and fresh exact-head human approval. A
+    reviewer must execute from trusted default-branch code, so it may
+    review an untrusted proposed change to its future version without
+    becoming self-modifying.
   - **Standard-risk:** documentation, copy, tests, styling, isolated low-impact
-    fixes, and similarly reversible work. A Francis-authored pull request may
-    merge under the standing steward authority above once technical readiness
-    is established. Other authors still require Francis's exact-head approval.
+    fixes, and similarly reversible work. These may merge under the standing
+    steward authority above once independent bot review of the exact head
+    being merged and technical readiness are established. A new push
+    requires a fresh exact-head bot review. An author cannot approve their
+    own pull request.
 - Treat an uncertain classification as protected-risk until a maintainer or
   engineering leader classifies it.
 - Address every material review finding. An author or maintainer may resolve an
@@ -210,7 +237,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
   unless the request authorizes that class of action.
 - Automated review may establish technical readiness but never grants merge
   authority by itself. Authority comes from the standard-risk standing steward
-  rule above or from Francis's explicit exact-head approval.
+  rule above or, for protected-risk work, from one eligible non-author human
+  reviewer named above.
 
 ## Brand and content
 
