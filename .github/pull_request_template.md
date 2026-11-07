@@ -32,5 +32,5 @@
 - [ ] Public errors and logs expose no sensitive implementation detail.
 - [ ] Rollout dependencies and rollback steps are explicit.
 - [ ] Required CI is green and every material review finding is addressed.
-- [ ] Francis approval is requested, unless the repository's documented frontend exception applies.
-- [ ] Protected-risk work has independent review in addition to Francis approval.
+- [ ] Eligible approval is requested per AGENTS.md: standard-risk after independent bot review; protected-risk also needs one non-author human reviewer (`francistickadoo`, `MarkPrethero`, or `kolarskydominik`). Delegated pricing is covered.
+- [ ] Protected-risk work has independent review in addition to that eligible human approval. An author cannot approve their own pull request.
