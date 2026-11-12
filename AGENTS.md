@@ -243,7 +243,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
 ## Brand and content
 
 - Always write the company name as `tickadoo`, including at the start of a
-  sentence. Never capitalize it.
+  sentence. Never capitalize it (`Tickadoo` is wrong even as a first word).
+- In customer- and staff-facing text, always write `easyBoxoffice`. Never
+  `easyboxoffice` or `EasyBoxOffice`. Identifiers, hostnames, slugs, partner
+  codes, CSS classes and package names stay lowercase as they are.
 - Preserve repository-specific design and editorial ownership boundaries.
 - Do not invent product, customer, commercial, or operational facts.
 
