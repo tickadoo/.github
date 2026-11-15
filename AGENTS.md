@@ -22,9 +22,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
   review nor the authority it checks. Its identity and entrypoint must be
   documented in the repository instructions. An author cannot review or
   approve their own pull request.
-- Protected-risk work, including Howard changes, money and pricing, and
-  cross-repository frontend changes, needs one human reviewer who is not the
-  author. That human approval, and the independent bot review, must both be
+- Protected-risk work, including Howard changes and money and pricing, needs
+  one human reviewer who is not the author. That human approval, and the independent bot review, must both be
   bound to the exact head being merged. Eligible human reviewers are Francis
   (`@francistickadoo`), Mark (`@MarkPrethero`), and Dominik
   (`@kolarskydominik`). Delegated pricing changes are covered by this rule.
@@ -86,10 +85,11 @@ safer interpretation, and ask engineering leadership to reconcile them.
   - This exception takes effect only after its adoption under the existing
     governance process. A proposed policy cannot authorize its own merge.
 - `tickadoo/frontend` retains Dominik's implementation ownership. Routine
-  frontend work follows the standing steward rule above. Protected-risk,
-  cross-repository, shared-contract, and monorepo-migration work remain
-  protected-risk and need one eligible non-author human reviewer named
-  above, bound to the exact head being merged, not Francis's personal
+  frontend work, including ordinary cross-repository and monorepo frontend
+  changes, follows the standing steward rule above. Frontend work remains
+  protected-risk only when it touches an existing protected-risk category
+  named in this file, and then needs one eligible non-author human reviewer
+  named above, bound to the exact head being merged, not Francis's personal
   approval. A new push requires fresh exact-head human approval. Local
   frontend instructions define the full boundary.
 - `tickadoo/tickadoo-app` has a separate app-only delegation from Francis.
@@ -132,8 +132,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
     controls; security boundaries; destructive operations; and governance
     trust roots such as CODEOWNERS, agent authority instructions,
     branch-protection automation, or the independent reviewer and merge
-    steward. This includes Howard changes, money and pricing, and
-    cross-repository frontend changes. Delegated pricing changes are covered.
+    steward. This includes Howard changes and money and pricing.
+    Delegated pricing changes are covered. Cross-repository or monorepo
+    frontend changes are not protected-risk by themselves; they are
+    protected-risk only when they also touch one of the categories above.
     These require one eligible non-author human reviewer named above
     (`@francistickadoo`, `@MarkPrethero`, or `@kolarskydominik`), not
     Francis's personal approval. That human approval and the independent
