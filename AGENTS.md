@@ -13,10 +13,11 @@ safer interpretation, and ask engineering leadership to reconcile them.
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
 - In every active repository, an author may merge their own pull request
-  once required CI is green on the exact head being merged, review threads
-  are resolved, and it carries no `hold` label, unless it touches a
+  once required CI is green on the exact head being merged, the exact-head
+  AI review required below has approved that same head, review threads are
+  resolved, and it carries no `hold` label, unless it touches a
   protected-risk path below (Francis, 2026-11-20). No human approval is
-  needed for that work. Microsites (`apps/easyboxoffice/`, `apps/blog/`,
+  needed for that work, but an independent AI review always is. Microsites (`apps/easyboxoffice/`, `apps/blog/`,
   `apps/white-label*/`), documentation, copy/i18n and tests-only changes take
   one independent exact-head AI review (the first, GLM, role of the shared
   review bot, independent of the authoring vendor). Other routine work
@@ -27,8 +28,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
   A new head that is the hosting platform's own update-branch merge of the
   base branch, merged without conflicts, where none of the files the base
   brought in are files the PR changes, keeps the earlier exact-head AI
-  review; any doubt means a fresh review. This exception applies to every
-  exact-head AI-review requirement in this file. Required CI must still pass
+  review; any doubt means a fresh review. The residual risk, a semantic
+  interaction with base changes in other files, is accepted as it already is
+  for an advancing base: post-merge CI and staged deploys catch it. This
+  exception applies to every exact-head AI-review requirement in this file. Required CI must still pass
   on that merge head, and any human approval a protected-risk PR needs must
   still be fresh. Any other new push needs a fresh AI review.
   The repository's approved automated merge steward keeps standing merge
