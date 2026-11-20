@@ -18,11 +18,16 @@ safer interpretation, and ask engineering leadership to reconcile them.
   protected-risk path below (Francis, 2026-11-20). No human approval is
   needed for that work. Microsites (`apps/easyboxoffice/`, `apps/blog/`,
   `apps/white-label*/`), documentation, copy/i18n and tests-only changes take
-  one independent exact-head AI review (first role only). Other routine work
+  one independent exact-head AI review (the first, GLM, role of the shared
+  review bot, independent of the authoring vendor). Other routine work
   takes the repository's normal exact-head AI review. AI review is capped at
-  three rounds per PR, after which a human decides. A new head that only
-  adds a clean merge of the base branch (the PR's own diff unchanged) keeps
-  the earlier exact-head AI review; this exception applies to every
+  three change-request rounds per PR; after that an eligible non-author
+  human reviewer named below decides, and only Francis's adjudication can
+  settle an unresolved AI gate. The cap never lets an author waive a gate.
+  A new head that is the hosting platform's own update-branch merge of the
+  base branch, merged without conflicts, where none of the files the base
+  brought in are files the PR changes, keeps the earlier exact-head AI
+  review; any doubt means a fresh review. This exception applies to every
   exact-head AI-review requirement in this file. Required CI must still pass
   on that merge head, and any human approval a protected-risk PR needs must
   still be fresh. Any other new push needs a fresh AI review.
@@ -174,10 +179,12 @@ safer interpretation, and ask engineering leadership to reconcile them.
     review an untrusted proposed change to its future version without
     becoming self-modifying.
   - **Standard-risk:** everything that is not protected-risk, including
-    documentation, copy, tests, styling, microsites and ordinary feature work.
+    documentation, copy/i18n, tests, styling, microsites and ordinary
+    feature work.
     The author or the standing steward may merge once required CI is green
     on the exact head, threads are resolved, and the exact-head AI review
-    approves (one first-role review for microsites, docs, copy and tests).
+    approves (one first-role review for microsites, docs, copy/i18n and
+    tests).
     A new push requires a fresh exact-head bot review, except a clean base
     merge as stated above. An author cannot approve their
     own pull request.
