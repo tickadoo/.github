@@ -12,26 +12,37 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- In every active repository, routine (standard-risk) work merges after
-  independent bot review of the exact head being merged. This policy grants
-  standing merge authority to the repository's approved automated merge
-  steward after exact-head opposite-vendor review, green required CI, resolved
-  threads, and complete reporting. A new push invalidates that review; merge
-  requires a fresh exact-head bot review. The steward must execute trusted
-  default-branch code, verify immutable evidence, and supply neither the
-  review nor the authority it checks. Its identity and entrypoint must be
-  documented in the repository instructions. An author cannot review or
-  approve their own pull request.
-- Protected-risk work, including Howard changes and money and pricing, needs
-  one human reviewer who is not the author. That human approval, and the independent bot review, must both be
-  bound to the exact head being merged. Eligible human reviewers are Francis
-  (`@francistickadoo`), Mark (`@MarkPrethero`), and Dominik
+- In every active repository, an author may merge their own pull request
+  once required CI is green on the exact head being merged, review threads
+  are resolved, and it carries no `hold` label, unless it touches a
+  protected-risk path below (Francis, 2026-11-20). No human approval is
+  needed for that work. Microsites (`apps/easyboxoffice/`, `apps/blog/`,
+  `apps/white-label*/`), documentation, copy/i18n and tests-only changes take
+  one independent exact-head AI review (first role only). Other routine work
+  takes the repository's normal exact-head AI review. AI review is capped at
+  three rounds per PR, after which a human decides. A new head that only
+  adds a clean merge of the base branch (the PR's own diff unchanged) keeps
+  the earlier exact-head AI review. Any other new push needs a fresh one.
+  The repository's approved automated merge steward keeps standing merge
+  authority under the same gates. It must execute trusted default-branch
+  code, verify immutable evidence, and supply neither the review nor the
+  authority it checks. Its identity and entrypoint must be documented in the
+  repository instructions. An author cannot review or approve their own pull
+  request.
+- Protected-risk work needs one human reviewer who is not the author, bound
+  to the exact head being merged, plus the independent exact-head AI review.
+  Protected-risk means a change that touches checkout, payments, pricing,
+  refunds or other money and financial calculations; SHIELD/Radar; database
+  migrations or SQL; secrets; authentication or authorization; or governance
+  trust roots (CODEOWNERS, `AGENTS.md`/`CLAUDE.md`, `.github/workflows/`, the
+  independent reviewer and merge steward). Each repository's
+  `.github/CODEOWNERS` lists those paths. Eligible human reviewers are
+  Francis (`@francistickadoo`), Mark (`@MarkPrethero`), and Dominik
   (`@kolarskydominik`). Delegated pricing changes are covered by this rule.
   Mark and Dominik may review each other's protected changes and complete
-  authorised merges without another personal sign-off from Francis.
-  Independent review, green required checks, and no author self-approval
-  remain required. Any new push requires fresh exact-head bot review and
-  fresh exact-head approval from an eligible non-author human reviewer.
+  authorised merges without another personal sign-off from Francis. Any new
+  push requires fresh exact-head approval from an eligible non-author human
+  reviewer.
 - Francis's exact-head authority may be recorded as a GitHub approval or as an
   authenticated, SHA-bound command issued by Francis from his own interactive
   session and retained in its auditable task or pull-request record. This is an
@@ -98,10 +109,11 @@ safer interpretation, and ask engineering leadership to reconcile them.
   booking display, offline ticket storage and other sensitive client code,
   but every PR requires exact-head independent opposite-vendor AI review,
   passing relevant tests and required CI, resolved material findings, and an
-  auditable review record. Independent AI review and eligible non-author
-  GitHub approval are separate mandatory gates. A GitHub approval alone does
-  not satisfy the AI-review gate; an author cannot review their own work.
-  Preserve the eligible non-author GitHub approval gate; Codex may
+  auditable review record. For protected-risk paths, independent AI review
+  and eligible non-author GitHub approval are separate mandatory gates. A
+  GitHub approval alone does not satisfy the AI-review gate; an author cannot
+  review their own work. Preserve that non-author GitHub approval gate on
+  protected-risk paths; Codex may
   submit that review on his behalf from an eligible non-author GitHub account
   without asking him again for an in-scope app change. Record the submitting
   account, actual reviewer vendor and exact reviewed SHA; a delegated identity
