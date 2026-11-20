@@ -23,8 +23,10 @@ safer interpretation, and ask engineering leadership to reconcile them.
   review bot, independent of the authoring vendor). Other routine work
   takes the repository's normal exact-head AI review. AI review is capped at
   three change-request rounds per PR; after that an eligible non-author
-  human reviewer named below decides, and only Francis's adjudication can
-  settle an unresolved AI gate. The cap never lets an author waive a gate.
+  human reviewer named below decides, and only Francis's recorded
+  adjudication can settle an unresolved AI gate. No one settles a gate on
+  their own pull request: when Francis is the author, the PR waits for a
+  fresh exact-head AI approval. The cap never lets an author waive a gate.
   A new head that is the hosting platform's own update-branch merge of the
   base branch, merged without conflicts, where none of the files the base
   brought in are files the PR changes, keeps the earlier exact-head AI
