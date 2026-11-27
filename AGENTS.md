@@ -250,6 +250,22 @@ safer interpretation, and ask engineering leadership to reconcile them.
   authority by itself. Authority comes from the routine owner-merge
   rule above or, for GO-list work, from Francis's exact-head GO.
 
+### Finish what you start (ownership)
+- The goal of every PR is a merge that ships to the website. The creator (the human or the AI they are using) owns it until it is merged or closed. Do not open a PR you do not intend to drive to merge.
+- Do not leave PRs sitting. Every CI run and review costs money. A PR with no progress for 48 hours is either pushed to merge by its owner or closed with a one-line reason by its owner.
+- Prefer one PR that fixes the problem over several partial ones. Do not open a PR just to record evidence or a plan.
+- Issues are for work that will be done. Whoever opens an issue owns it until it is fixed (linked merged PR) or closed with a reason. Do not open an issue for something you can fix now; fix it. No issue stays open for more than 7 days without a linked open PR.
+
+### Alerts: first to pick it up fixes it
+- Whoever claims an alert first owns it through to the fix: claim, find the cause, open the fix PR, merge, verify live, close. Commentary without a fix is not progress.
+- If you cannot fix it, hand it once to a named owner with the cause and the one action needed, then stop posting.
+- Sales come first: anything that blocks a customer from buying gets fixed before anything else.
+
+### Slack is for humans
+- Slack is mainly for the human team. Keep bot posts short (3 lines max), plain English, no logs or long technical detail (put that in the PR or issue and link it).
+- Before posting, find the existing thread for that task, alert or PR and reply there. Do not start a new top-level post for something that already has a thread.
+- Every thread you start must end with a closing line from you: fixed and live, or closed with a reason.
+
 ## Brand and content
 
 - Always write the company name as `tickadoo`, including at the start of a
