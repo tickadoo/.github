@@ -12,57 +12,52 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Authority does not remove routine safeguards. Feature branches,
   risk-appropriate review, required CI, least privilege, and auditable changes
   protect the company from compromised accounts and honest mistakes.
-- In every active repository, an author may merge their own pull request
-  once required CI is green on the exact head being merged, the exact-head
-  AI review required below has approved that same head, review threads are
-  resolved, and it carries no `hold` label, unless it touches a
-  protected-risk path below (Francis, 2026-11-20). No human approval is
-  needed for that work, but an independent AI review always is. Microsites (`apps/easyboxoffice/`, `apps/blog/`,
-  `apps/white-label*/`), documentation, copy/i18n and tests-only changes take
-  one independent exact-head AI review (the first, GLM, role of the shared
-  review bot, independent of the authoring vendor). Other routine work
-  takes the repository's normal exact-head AI review. AI review is capped at
-  three change-request rounds per PR; after that an eligible non-author
-  human reviewer named below decides, and only Francis's recorded
-  adjudication can settle an unresolved AI gate. No one settles a gate on
-  their own pull request: when Francis is the author, the PR waits for a
-  fresh exact-head AI approval. The cap never lets an author waive a gate.
+- **Routine work merges itself.** Any pull request that is not on the
+  Francis GO list below is routine. Its owner (the author or the author's
+  bot) merges it, with a squash pinned to the exact head, once required CI
+  is green on that head, both independent exact-head AI reviews (the first,
+  GLM, and second, DeepSeek, roles of the shared review bot, neither from
+  the authoring vendor) approve that same head, review threads are
+  resolved, and it carries no `hold` label. No human approval is needed and
+  no one is asked to merge it (Francis, 2026-11-27). A human "request
+  changes" still blocks. AI review is capped at three change-request rounds
+  per PR; after that the owner escalates once to the named human owner and
+  stops, and only Francis's recorded adjudication can settle an unresolved
+  AI gate. An author cannot review or approve their own pull request.
   A new head that is the hosting platform's own update-branch merge of the
   base branch, merged without conflicts, where none of the files the base
   brought in are files the PR changes, keeps the earlier exact-head AI
-  review; any doubt means a fresh review. The residual risk, a semantic
-  interaction with base changes in other files, is accepted as it already is
-  for an advancing base: post-merge CI and staged deploys catch it. This
-  exception applies to every exact-head AI-review requirement in this file. Required CI must still pass
-  on that merge head, and any human approval a protected-risk PR needs must
-  still be fresh. Any other new push needs a fresh AI review.
+  reviews; any doubt means a fresh review. Required CI must still pass on
+  that merge head. Any other new push needs fresh AI reviews.
   The repository's approved automated merge steward keeps standing merge
   authority under the same gates. It must execute trusted default-branch
   code, verify immutable evidence, and supply neither the review nor the
   authority it checks. Its identity and entrypoint must be documented in the
-  repository instructions. An author cannot review or approve their own pull
-  request.
-- Protected-risk work needs one human reviewer who is not the author, bound
-  to the exact head being merged, plus the independent exact-head AI review.
-  The one canonical definition of protected-risk is under "Delivery
-  workflow" below: in short, checkout, payments, pricing, refunds and other
-  money; SHIELD/Radar; migrations and SQL; secrets; auth; governance trust
-  roots; plus customer data, production infrastructure, security boundaries
-  and destructive operations. A repository is not protected-risk as a whole
-  (Howard included). Each repository's `.github/CODEOWNERS` lists its
-  protected paths. Eligible human reviewers are
-  Francis (`@francistickadoo`), Mark (`@MarkPrethero`), and Dominik
-  (`@kolarskydominik`). Delegated pricing changes are covered by this rule.
-  Mark and Dominik may review each other's protected changes and complete
-  authorised merges without another personal sign-off from Francis. Any new
-  push requires fresh exact-head approval from an eligible non-author human
-  reviewer.
+  repository instructions.
+- **Francis GO list (protected-risk).** Francis's exact-head GO, given once
+  per PR at its final head, is the only human gate, and it applies only to
+  a change that:
+  1. changes money taken or given back: live charge amounts, refunds,
+     payouts, or the pricing or discount maths that sets what a customer
+     pays, including switching such a feature on;
+  2. touches secrets, credentials, or who has admin or production access;
+  3. deletes or overwrites production data: destructive migrations,
+     backfills, or bulk deletes (an additive migration is routine);
+  4. switches on consent or marketing (email, ads, tracking) for customers;
+  5. changes the safety machinery: the review bot, merge rules, branch
+     protection or its automation, CODEOWNERS, `.github/workflows/`, or
+     agent instructions (`AGENTS.md`, `CLAUDE.md`).
+  The canonical definition is under "Delivery workflow" below, and each
+  repository's `.github/CODEOWNERS` lists only these paths. A GO carries
+  over a clean update-branch merge and test-only commits; ask again only if
+  the money, data, access, consent or governance behaviour changed. These
+  PRs also need both exact-head AI reviews and green required CI.
 - Francis's exact-head authority may be recorded as a GitHub approval or as an
   authenticated, SHA-bound command issued by Francis from his own interactive
   session and retained in its auditable task or pull-request record. This is an
-  authority record, not a steward attestation. It does not replace the required
-  non-author eligible human reviewer on Francis-authored protected work, and it
-  does not make an author self-approval valid. Only
+  authority record, not a steward attestation. On Francis-authored GO-list work,
+  Mark (`@MarkPrethero`) or Dominik (`@kolarskydominik`) gives the GO
+  instead, and an author self-approval is never valid. Only
   `@francistickadoo` may use a repository protection bypass after the approved
   steward verifies the applicable gates, or through the explicit owner
   execution path below. A bypass never authorizes ignoring a material failing
@@ -111,11 +106,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
     governance process. A proposed policy cannot authorize its own merge.
 - `tickadoo/frontend` retains Dominik's implementation ownership. Routine
   frontend work, including ordinary cross-repository and monorepo frontend
-  changes, follows the standing steward rule above. Frontend work remains
-  protected-risk only when it touches an existing protected-risk category
-  named in this file, and then needs one eligible non-author human reviewer
-  named above, bound to the exact head being merged, not Francis's personal
-  approval. A new push requires fresh exact-head human approval. Local
+  changes, follows the standing steward rule above. Frontend work needs
+  Francis's GO only when it touches the Francis GO list above. Local
   frontend instructions define the full boundary.
 - `tickadoo/tickadoo-app` has a separate app-only delegation from Francis.
   Dominik owns implementation, PR merges, Simulator/device validation and
@@ -139,10 +131,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
   Howard), shared API contracts, production data or money actions,
   new permissions/credentials, security-boundary changes, governance
   controls, destructive operations and monorepo migration. These remain
-  outside the app-only delegation and follow the protected-risk eligible
-  human-reviewer rule above, including delegated pricing changes; they do
-  not require Francis's personal approval when an eligible non-author
-  reviewer has approved the exact head being merged. Public App Store
+  outside the app-only delegation; they are routine unless they touch the
+  Francis GO list above, which then applies. Public App Store
   submission/release and marketing claims stay with the designated
   release/product owner, currently Mark; app autonomy does not waive release
   acceptance tests or independently authorize a public release.
@@ -153,48 +143,32 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Open a focused pull request with customer impact, security/data impact,
   validation, dependencies, rollout, and rollback notes.
 - Classify the change before merge:
-  - **Protected-risk** (canonical definition): authentication or
-    authorization; secrets; checkout, payments, pricing, refunds or other
-    financial calculations; SHIELD/Radar; customer or personal data; database
-    migrations, SQL or backfills; production infrastructure, access, or
-    deployment controls; security boundaries; destructive operations; and
-    governance trust roots such as CODEOWNERS, `AGENTS.md`/`CLAUDE.md`,
-    `.github/workflows/`, branch-protection automation, or the independent
-    reviewer and merge steward. Delegated pricing changes are covered. No
-    repository is protected-risk as a whole: a Howard change is
-    protected-risk only when it touches one of these categories.
-    Cross-repository or monorepo frontend changes are not protected-risk
-    by themselves; they are protected-risk only when they also touch one of
-    the categories above.
-    These require one eligible non-author human reviewer named above
-    (`@francistickadoo`, `@MarkPrethero`, or `@kolarskydominik`), not
-    Francis's personal approval. That human approval and the independent
-    bot review must both apply to the exact head being merged. Mark and
-    Dominik may review each other's protected changes and complete
-    authorised merges without another personal sign-off from Francis.
-    Client changes in `tickadoo/tickadoo-app` that satisfy every app-only
-    delegation boundary above remain under that delegation. Every category
-    in the app-only delegation exclusion list above is protected-risk even
-    in `tickadoo/tickadoo-app` and follows this eligible-reviewer rule.
-    Every change still requires all required CI and exact-head
-    opposite-vendor review of that same final head. A new push requires
-    fresh exact-head human approval and a fresh exact-head bot review,
-    except that a clean base merge keeps the bot review as stated above. A
-    reviewer must execute from trusted default-branch code, so it may
-    review an untrusted proposed change to its future version without
-    becoming self-modifying.
-  - **Standard-risk:** everything that is not protected-risk, including
-    documentation, copy/i18n, tests, styling, microsites and ordinary
-    feature work.
-    The author or the standing steward may merge once required CI is green
-    on the exact head, threads are resolved, and the exact-head AI review
-    approves (one first-role review for microsites, docs, copy/i18n and
-    tests).
-    A new push requires a fresh exact-head bot review, except a clean base
-    merge as stated above. An author cannot approve their
-    own pull request.
-- Treat an uncertain classification as protected-risk until a maintainer or
-  engineering leader classifies it.
+  - **Protected-risk (Francis GO list, canonical definition):** a change
+    that (1) changes money taken or given back, meaning live charge
+    amounts, refunds, payouts, or the pricing or discount maths that sets
+    what a customer pays, including switching such a feature on; (2)
+    touches secrets, credentials, or who has admin or production access;
+    (3) deletes or overwrites production data through destructive
+    migrations, backfills or bulk deletes; (4) switches on consent or
+    marketing for customers; or (5) changes the safety machinery: the
+    independent reviewer and merge steward, merge rules, branch protection
+    or its automation, CODEOWNERS, `.github/workflows/`, or
+    `AGENTS.md`/`CLAUDE.md`. No repository is protected-risk as a whole.
+    These need Francis's exact-head GO, both exact-head AI reviews and all
+    required CI on the same final head. Client changes in
+    `tickadoo/tickadoo-app` that satisfy every app-only delegation boundary
+    above remain under that delegation.
+  - **Routine:** everything else, including checkout UI, auth code that
+    does not change who has access, SHIELD/Radar rule tuning, additive
+    migrations, shared routing, documentation, copy/i18n, tests, styling,
+    microsites and ordinary feature work. The owner merges once required CI
+    is green on the exact head, threads are resolved, and both exact-head
+    AI reviews approve that head. No human approval is needed. A new push
+    requires fresh exact-head AI reviews, except a clean base merge as
+    stated above. If a post-merge deploy fails its health checks, the merge
+    is reverted and the owner is told once.
+- When it is unclear whether a change is on the GO list, ask Francis once in
+  the PR; do not hold routine work for it.
 - Address every material review finding. An author or maintainer may resolve an
   obsolete, duplicate, or demonstrably out-of-scope thread with a short reason;
   review bookkeeping must not block unrelated, verified work indefinitely.
@@ -273,9 +247,8 @@ safer interpretation, and ask engineering leadership to reconcile them.
 - Never send messages, merge, deploy, change settings, or create external tasks
   unless the request authorizes that class of action.
 - Automated review may establish technical readiness but never grants merge
-  authority by itself. Authority comes from the standard-risk standing steward
-  rule above or, for protected-risk work, from one eligible non-author human
-  reviewer named above.
+  authority by itself. Authority comes from the routine owner-merge
+  rule above or, for GO-list work, from Francis's exact-head GO.
 
 ## Brand and content
 
