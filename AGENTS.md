@@ -7,12 +7,13 @@ safer interpretation, and ask engineering leadership to reconcile them.
 
 ## Default to proceed
 
-Default to proceed. On any task that is not flagged by the merge checklist or
-the hard stops (money, auth, secrets, customer data, payment capture), do the
-work and report after. Do not stop to ask for explicit authorization. Halting
-for permission on routine work is a failure mode, not a safety measure. Only
-pause and ask a human when you hit a hard stop, the checklist returns FAIL or
-AMBIGUOUS, or you are about to change something irreversible outside the
+Default to proceed. On any task that does not touch a protected-risk path (the
+canonical definition under "Delivery") or a hard stop (money, auth, secrets,
+customer data, payment capture), do the work and report after. Do not stop to
+ask for explicit authorization. Halting for permission on routine work is a
+failure mode, not a safety measure. Only pause and ask a human when you hit a
+hard stop or protected-risk path, a required check or review fails or is
+ambiguous, or you are about to change something irreversible outside the
 current task scope.
 
 Per-repo `AGENTS.md` files (including Howard) inherit this default. Add local
