@@ -8,16 +8,20 @@ on:
       - .github/workflows/agent-instructions.yml
   workflow_call:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   agent-instructions:
     name: agent-instructions
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - name: Checkout exact candidate
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Verify one canonical instruction source
         shell: bash
