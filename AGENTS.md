@@ -136,7 +136,11 @@ routing, docs, copy, tests, styling and microsites.
   `main` gains the same number before you merge, renumber yours. Never edit a
   merged migration.
 - **Main is red:** whoever's merge turned `main` red fixes or reverts it
-  within an hour. Other PRs are not blocked by it and need no action.
+  within an hour. Other PRs are not blocked by it and need no action. This
+  includes a failing test: the author fixes it, or skips it with a linked
+  issue, within an hour; it is never left to block other people's pushes.
+  Local pre-push hooks run only format, lint, typecheck and the tests related
+  to the changed files; the full suite runs in CI.
 - **Behind main:** being behind is not a blocker. Update only for a conflict
   or when GitHub requires it.
 - **Drafts:** a draft never merges. Mark it ready or close it within 48 hours.
